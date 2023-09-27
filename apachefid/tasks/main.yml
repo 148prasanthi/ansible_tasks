@@ -1,0 +1,45 @@
+
+---
+
+- name: Install "{{ package }}"
+
+  yum:
+
+   name: "{{ package }}"
+
+   state: present
+
+- name: copy the content from index.html.j2 to index.html
+
+  template:
+
+   src: index.html.j2
+
+   dest: "{{ content_main_location }}/index.html"
+
+- name: copy the content from prasanthi.html to index.html
+
+  copy:
+
+   src: prasanthi.html
+
+   dest: "{{ content_main_location }}/prasanthi.html"
+
+  notify: restart service
+
+- name: read the content
+
+  uri:
+
+   url: "{{ myurl }}"
+
+   return_content: yes
+
+  register: uri_output
+
+- name: print output
+
+  debug:
+
+   var: uri_output.content
+

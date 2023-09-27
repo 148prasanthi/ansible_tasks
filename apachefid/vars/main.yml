@@ -1,0 +1,3 @@
+package: httpd
+content_main_location: /var/www/html
+myurl: http://192.168.100.18
